@@ -1,0 +1,203 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * DESIGN SYSTEM: Academic Paper Texture
+ * Movement: Neo-Traditionalism × Contemporary Academic Journal Aesthetics
+ * Color Philosophy: Warm parchment background + deep olive sidebar
+ * Typography: Cormorant Garamond (display) + Lora (body) + IBM Plex Sans (UI)
+ * Layout: Fixed left sidebar navigation + scrollable right content
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Warm parchment palette */
+  --background: oklch(0.978 0.008 80);         /* #FAF8F5 warm ivory */
+  --foreground: oklch(0.18 0.015 60);           /* #1C1A17 deep warm black */
+  --card: oklch(0.972 0.008 80);
+  --card-foreground: oklch(0.18 0.015 60);
+  --popover: oklch(0.972 0.008 80);
+  --popover-foreground: oklch(0.18 0.015 60);
+
+  /* Academic red as primary */
+  --primary: oklch(0.45 0.18 25);              /* #C0392B academic red */
+  --primary-foreground: oklch(0.98 0 0);
+
+  --secondary: oklch(0.94 0.01 80);
+  --secondary-foreground: oklch(0.3 0.015 60);
+
+  --muted: oklch(0.94 0.008 80);
+  --muted-foreground: oklch(0.52 0.02 70);
+
+  --accent: oklch(0.92 0.012 80);
+  --accent-foreground: oklch(0.18 0.015 60);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(0.87 0.015 75);              /* #D4C9B8 warm border */
+  --input: oklch(0.87 0.015 75);
+  --ring: oklch(0.45 0.18 25);
+
+  /* Sidebar: deep olive green */
+  --sidebar: oklch(0.26 0.04 140);             /* #2D3B2D deep olive */
+  --sidebar-foreground: oklch(0.88 0.015 90);
+  --sidebar-primary: oklch(0.45 0.18 25);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.32 0.04 140);
+  --sidebar-accent-foreground: oklch(0.92 0.01 90);
+  --sidebar-border: oklch(0.32 0.04 140);
+  --sidebar-ring: oklch(0.45 0.18 25);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Lora', Georgia, serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Academic paper texture overlay */
+  .paper-texture {
+    background-image: 
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  /* Section title with left decorative line */
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 1rem;
+  }
+  .section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    bottom: 0.15em;
+    width: 3px;
+    background-color: oklch(0.45 0.18 25);
+  }
+
+  /* Publication tag */
+  .pub-tag {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+  }
+
+  /* Research highlight block */
+  .research-block {
+    border-left: 3px solid oklch(0.87 0.015 75);
+    padding-left: 1.25rem;
+    transition: border-color 0.2s ease;
+  }
+  .research-block:hover {
+    border-left-color: oklch(0.45 0.18 25);
+  }
+
+  /* Smooth fade-in animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+  }
+}
